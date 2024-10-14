@@ -1,14 +1,13 @@
 package com.example.PredictionService.entity;
 
-import com.example.PredictionService.service_enum.MatchResult;
-import com.example.PredictionService.service_enum.MatchStatus;
+import com.example.PredictionService.app_enum.MatchResult;
+import com.example.PredictionService.app_enum.MatchStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 import java.util.UUID;
 
 @Data

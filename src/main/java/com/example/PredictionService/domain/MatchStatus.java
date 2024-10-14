@@ -1,4 +1,4 @@
-package com.example.PredictionService.service_enum;
+package com.example.PredictionService.app_enum;
 
 public enum MatchStatus {
     PLANNED,

@@ -1,6 +1,6 @@
 package com.example.PredictionService.entity;
 
-import com.example.PredictionService.service_enum.MatchResult;
+import com.example.PredictionService.app_enum.MatchResult;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
