@@ -1,6 +1,6 @@
-package com.example.PredictionService.entity;
+package com.example.PredictionService.domain.entity;
 
-import com.example.PredictionService.app_enum.MatchResult;
+import com.example.PredictionService.domain.MatchResult;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +25,7 @@ public class Predict {
     @Column(name = "match_result")
     private MatchResult matchResult;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 }

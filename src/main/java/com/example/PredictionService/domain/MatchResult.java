@@ -1,4 +1,4 @@
-package com.example.PredictionService.app_enum;
+package com.example.PredictionService.domain;
 
 public enum MatchResult {
     HOME_VICTORY,

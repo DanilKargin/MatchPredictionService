@@ -1,4 +1,4 @@
-package com.example.PredictionService.entity;
+package com.example.PredictionService.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,6 +27,7 @@ public class ExpertRating {
     @Column(name = "update_date", nullable = false)
     private Date updateDate;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 }

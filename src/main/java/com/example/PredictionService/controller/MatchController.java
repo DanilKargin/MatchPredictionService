@@ -1,16 +1,17 @@
 package com.example.PredictionService.controller;
 
-import com.example.PredictionService.domain.entity.User;
-import com.example.PredictionService.service.UserService;
+import com.example.PredictionService.service.MatchService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("match")
 @RequiredArgsConstructor
-public class UserController {
-    private UserService userService;
+public class MatchController {
+    private final MatchService matchService;
 
 
 }

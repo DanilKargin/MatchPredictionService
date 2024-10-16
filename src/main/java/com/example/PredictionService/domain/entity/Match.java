@@ -1,7 +1,7 @@
-package com.example.PredictionService.entity;
+package com.example.PredictionService.domain.entity;
 
-import com.example.PredictionService.app_enum.MatchResult;
-import com.example.PredictionService.app_enum.MatchStatus;
+import com.example.PredictionService.domain.MatchResult;
+import com.example.PredictionService.domain.MatchStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
