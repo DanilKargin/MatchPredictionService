@@ -1,40 +1,40 @@
 package com.example.PredictionService.controller;
 
-import com.example.PredictionService.controller.domain.MatchUpdateRequest;
-import com.example.PredictionService.dto.MatchDto;
+import com.example.PredictionService.controller.domain.MatchRequest;
+import com.example.PredictionService.controller.domain.MatchResultRequest;
+import com.example.PredictionService.domain.entity.Match;
 import com.example.PredictionService.service.MatchService;
-import io.swagger.v3.oas.annotations.security.OAuthFlow;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.nio.file.Path;
 import java.util.List;
+
+import static com.example.PredictionService.config.SecurityConfiguration.SECURITY_CONFIG_NAME;
 
 @RestController
 @RequestMapping("/match")
 @AllArgsConstructor
+@SecurityRequirement(name = SECURITY_CONFIG_NAME)
 public class MatchController {
     MatchService matchService;
 
     @GetMapping
-    public ResponseEntity<String> getTest(){
-        return ResponseEntity.ok("Все good");
+    public ResponseEntity<List<Match>> getList(@PageableDefault()
+                                                   Pageable pageable){
+        return ResponseEntity.ok(matchService.getMatchList(pageable));
     }
 
-    @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public void createMatch(@RequestBody MatchDto newMatch){
-        //matchService.saveMatch(newMatch);
+    @PostMapping("/create")
+    public ResponseEntity<Match> createMatch(@RequestBody MatchRequest newMatch){
+        return ResponseEntity.ok(matchService.createMatch(newMatch));
     }
-    /*@PutMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<MatchDto> updateResultMatch(@RequestBody MatchUpdateRequest newResult){
-        return ResponseEntity.ok(matchService.updateMatchResult(newResult));
-    }*/
+
+    @PutMapping("/edit-result")
+    public ResponseEntity<Match> editResult(@RequestBody MatchResultRequest request){
+        return ResponseEntity.ok(matchService.editMatchResult(request));
+    }
 
 }

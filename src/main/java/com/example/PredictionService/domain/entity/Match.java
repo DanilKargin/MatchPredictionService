@@ -22,6 +22,9 @@ public class Match {
     @Column(name = "match_id")
     private UUID id;
 
+    @Column(name = "match_name", unique = true, nullable = false)
+    private String match_name;
+
     @Column(name = "home_team", nullable = false)
     private String home_team;
 
@@ -29,7 +32,7 @@ public class Match {
     private String guest_team;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "match_status", columnDefinition = "varchar(255) default 'PLANNED'", nullable = false)
+    @Column(name = "match_status", nullable = false)
     private MatchStatus status;
 
     @Enumerated(EnumType.STRING)

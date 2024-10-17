@@ -51,9 +51,10 @@ public class SecurityConfiguration {
                     return corsConfiguration;
                 }))
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/user").hasAuthority("ADMIN")
                         .requestMatchers("/user/block-user").hasAuthority("ADMIN")
-                                .anyRequest().permitAll())
+                        .requestMatchers("/match/create").hasAuthority("ADMIN")
+                        .requestMatchers("/match/edit-result").hasAuthority("ADMIN")
+                                .anyRequest().hasAuthority("CLIENT"))
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
