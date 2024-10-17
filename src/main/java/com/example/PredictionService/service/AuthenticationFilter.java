@@ -38,7 +38,7 @@ public class AuthenticationFilter extends OncePerRequestFilter{
 
         var jwt = authHeader.substring(BEARER_PREFIX.length());
 
-        //
+
 
         var username = jwtService.extractUserName(jwt);
 

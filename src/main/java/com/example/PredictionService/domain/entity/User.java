@@ -18,8 +18,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "users")
+@Entity(name = "users")
 public class User implements UserDetails {
     @Id
     @GeneratedValue
@@ -27,7 +26,7 @@ public class User implements UserDetails {
     private UUID id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role", columnDefinition = "string default CLIENT", nullable = false)
+    @Column(name = "role", columnDefinition = "varchar(255) default 'CLIENT'", nullable = false)
     private Role role;
 
     @Column(name = "username",unique = true, nullable = false)
@@ -36,13 +35,8 @@ public class User implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "is_blocked", columnDefinition = "boolean default false", nullable = false)
-    private Boolean is_blocked;
 
-    @OneToOne(cascade = CascadeType.DETACH, mappedBy = "users")
-    private ExpertRating expertRating;
-
-    @OneToMany(cascade = CascadeType.DETACH, mappedBy = "users")
+    @OneToMany(cascade = CascadeType.DETACH)
     private List<Predict> predicts;
 
     @Override

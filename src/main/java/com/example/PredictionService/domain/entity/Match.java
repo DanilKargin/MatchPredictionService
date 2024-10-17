@@ -8,14 +8,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "matches")
+@Entity(name = "matches")
 public class Match {
     @Id
     @GeneratedValue
@@ -29,10 +29,13 @@ public class Match {
     private String guest_team;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", columnDefinition = "string default PLANNED")
+    @Column(name = "match_status", columnDefinition = "varchar(255) default 'PLANNED'", nullable = false)
     private MatchStatus status;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "result")
+    @Column(name = "match_result")
     private MatchResult result;
+
+    @OneToMany(cascade = CascadeType.DETACH)
+    private List<Predict> predicts;
 }

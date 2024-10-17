@@ -13,8 +13,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "predicts")
+@Entity(name = "predicts")
 public class Predict {
     @Id
     @GeneratedValue
@@ -22,10 +21,14 @@ public class Predict {
     private UUID id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "match_result")
-    private MatchResult matchResult;
+    @Column(name = "predict_result")
+    private MatchResult result;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "match_id")
+    private Match match;
 }

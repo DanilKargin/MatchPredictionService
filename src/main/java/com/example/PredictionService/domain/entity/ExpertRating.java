@@ -13,8 +13,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "expert_ratings")
+@Entity(name = "expert_ratings")
 public class ExpertRating {
     @Id
     @GeneratedValue
@@ -27,7 +26,7 @@ public class ExpertRating {
     @Column(name = "update_date", nullable = false)
     private Date updateDate;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_id")
     private User user;
 }

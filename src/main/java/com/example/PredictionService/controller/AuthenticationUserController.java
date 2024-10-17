@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("auth")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthenticationUserController {
     private final AuthenticationService authenticationService;
@@ -24,5 +24,8 @@ public class AuthenticationUserController {
     @PostMapping("/sign-in")
     public TokenResponse signIn(@RequestBody SignInRequest request) {
         return authenticationService.signIn(request);
+
     }
+
+
 }
