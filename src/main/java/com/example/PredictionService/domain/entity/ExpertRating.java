@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -22,9 +23,6 @@ public class ExpertRating {
 
     @Column(name = "rating", columnDefinition = "integer default 0", nullable = false)
     private Integer rating;
-
-    @Column(name = "update_date", nullable = false)
-    private Date updateDate;
 
     @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_id")

@@ -1,16 +1,15 @@
 package com.example.PredictionService.service;
 
-import com.example.PredictionService.controller.domain.MatchRequest;
 import com.example.PredictionService.controller.domain.PredictRequest;
 import com.example.PredictionService.controller.domain.PredictResponse;
 import com.example.PredictionService.domain.MatchResult;
 import com.example.PredictionService.domain.MatchStatus;
+import com.example.PredictionService.domain.entity.Match;
 import com.example.PredictionService.domain.entity.Predict;
 import com.example.PredictionService.repository.PredictRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.webjars.NotFoundException;
 
 import java.util.List;
 import java.util.UUID;
@@ -28,6 +27,10 @@ public class PredictService {
         return predictRepository.getPredictsPlannedMatches().stream()
                 .map(PredictResponse::new).collect(Collectors.toList());
     }
+    public List<Predict> getPredictListByMatch(Match match){
+        return predictRepository.getWinPredictsByMatch(match);
+    }
+
     public Predict savePredict(Predict predict){
         return predictRepository.save(predict);
     }
@@ -39,7 +42,7 @@ public class PredictService {
         }
         var user = userService.getCurrentUser();
         var predict = Predict.builder()
-                .result(MatchResult.valueOf(newPredict.getMatch_result()))
+                .predict_result(MatchResult.valueOf(newPredict.getMatch_result()))
                 .user(user)
                 .match(match)
                 .build();

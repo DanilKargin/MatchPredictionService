@@ -1,2 +1,1 @@
  INSERT INTO users (user_id, role, username, password) VALUES('123e4567-e89b-12d3-a456-556642440000', 'ADMIN', 'user', '$2a$10$JzDChNYYVFFWNeyKhJf/eO6la4cNxsZqzAa5EU1UVxa6Ot94NfvbS');
-  INSERT INTO users (user_id, role, username, password) VALUES('123e4567-e89b-13d3-a456-556642440000', 'EXPERT', 'expert', '$2a$10$JzDChNYYVFFWNeyKhJf/eO6la4cNxsZqzAa5EU1UVxa6Ot94NfvbS');

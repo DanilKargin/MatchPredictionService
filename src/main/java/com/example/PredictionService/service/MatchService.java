@@ -6,6 +6,7 @@ import com.example.PredictionService.domain.MatchResult;
 import com.example.PredictionService.domain.MatchStatus;
 import com.example.PredictionService.domain.entity.Match;
 import com.example.PredictionService.repository.MatchRepository;
+import com.example.PredictionService.repository.PredictRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MatchService {
     private final MatchRepository matchRepository;
+    private final PredictRepository predictRepository;
+    private final ExpertRatingService expertRatingService;
+
     public List<Match> getMatchList(Pageable pageable){
         Page<Match> matches = matchRepository.findAll(pageable);
         return matches.stream().toList();
@@ -44,9 +48,13 @@ public class MatchService {
     @Transactional
     public Match editMatchResult(MatchResultRequest request){
         var match = findByName(request.getName());
-        match.setResult(MatchResult.valueOf(request.getResult()));
+        match.setMatch_result(MatchResult.valueOf(request.getResult()));
         match.setStatus(MatchStatus.FINISHED);
-        // Здесь нужно вызвать метод подсчета рейтинга
+
+        var predicts = predictRepository.getWinPredictsByMatch(match);
+        for(var predict : predicts){
+            expertRatingService.editRating(predict.getUser());
+        }
         return saveMatch(match);
     }
 

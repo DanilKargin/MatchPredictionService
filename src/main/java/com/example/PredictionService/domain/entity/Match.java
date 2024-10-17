@@ -37,7 +37,7 @@ public class Match {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "match_result")
-    private MatchResult result;
+    private MatchResult match_result;
 
     @OneToMany(cascade = CascadeType.DETACH)
     private List<Predict> predicts;

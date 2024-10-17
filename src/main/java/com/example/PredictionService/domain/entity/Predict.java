@@ -22,7 +22,7 @@ public class Predict {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "predict_result")
-    private MatchResult result;
+    private MatchResult predict_result;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

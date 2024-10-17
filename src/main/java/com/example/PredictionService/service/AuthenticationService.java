@@ -4,6 +4,7 @@ import com.example.PredictionService.controller.domain.SignInRequest;
 import com.example.PredictionService.controller.domain.SignUpRequest;
 import com.example.PredictionService.controller.domain.TokenResponse;
 import com.example.PredictionService.domain.Role;
+import com.example.PredictionService.domain.entity.ExpertRating;
 import com.example.PredictionService.domain.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,12 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class AuthenticationService {
     private final UserService userService;
+    private final ExpertRatingService expertRatingService;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
     @Transactional
-    public TokenResponse signUp(SignUpRequest request) {
+    public TokenResponse signUpClient(SignUpRequest request) {
 
         var user = User.builder()
                 .username(request.getUsername())
@@ -30,6 +32,21 @@ public class AuthenticationService {
                 .build();
 
         userService.create(user);
+
+        var jwt = jwtService.generateToken(user);
+        return new TokenResponse(jwt);
+    }
+    @Transactional
+    public TokenResponse signUpExpert(SignUpRequest request) {
+
+        var user = User.builder()
+                .username(request.getUsername())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(Role.EXPERT)
+                .build();
+
+        userService.create(user);
+        expertRatingService.createRating(user);
 
         var jwt = jwtService.generateToken(user);
         return new TokenResponse(jwt);
