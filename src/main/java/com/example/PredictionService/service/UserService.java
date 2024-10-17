@@ -38,7 +38,6 @@ public class UserService {
                 .orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден"));
 
     }
-
     public UserDetailsService userDetailsService() {
         return this::getByUsername;
     }
@@ -47,12 +46,11 @@ public class UserService {
         var username = SecurityContextHolder.getContext().getAuthentication().getName();
         return getByUsername(username);
     }
-    @Transactional
-    public void blockUser(BlockedUserRequest userRequest){
+    public User blockUser(BlockedUserRequest userRequest){
         var blockedUser = getByUsername(userRequest.getUsername());
             if(blockedUser.getRole() != Role.ADMIN){
                 blockedUser.setRole(Role.BLOCKED);
-                save(blockedUser);
+                return save(blockedUser);
             }else{
                 throw new RuntimeException("У пользователя привелегии администратора");
             }

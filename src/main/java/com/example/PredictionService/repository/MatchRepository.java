@@ -9,6 +9,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface MatchRepository extends JpaRepository<Match, UUID> {
-    @Query("SELECT * FROM matches m WHERE m.match_name LIKE ?1")
+    @Query("SELECT m FROM matches m WHERE m.match_name LIKE ?1")
     Optional<Match> findByName(String name);
 }

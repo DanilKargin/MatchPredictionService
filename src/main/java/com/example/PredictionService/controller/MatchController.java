@@ -6,6 +6,7 @@ import com.example.PredictionService.domain.entity.Match;
 import com.example.PredictionService.service.MatchService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +17,12 @@ import static com.example.PredictionService.config.SecurityConfiguration.SECURIT
 
 @RestController
 @RequestMapping("/match")
-@AllArgsConstructor
+@RequiredArgsConstructor
 @SecurityRequirement(name = SECURITY_CONFIG_NAME)
 public class MatchController {
-    MatchService matchService;
+    private final MatchService matchService;
 
-    @GetMapping
+    @GetMapping("/list")
     public ResponseEntity<List<Match>> getList(@PageableDefault()
                                                    Pageable pageable){
         return ResponseEntity.ok(matchService.getMatchList(pageable));

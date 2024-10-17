@@ -9,7 +9,6 @@ import com.example.PredictionService.repository.MatchRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
@@ -20,7 +19,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MatchService {
     private final MatchRepository matchRepository;
-    private final PredictService predictService;
     public List<Match> getMatchList(Pageable pageable){
         Page<Match> matches = matchRepository.findAll(pageable);
         return matches.stream().toList();

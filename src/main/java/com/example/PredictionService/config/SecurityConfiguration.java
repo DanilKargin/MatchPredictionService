@@ -54,7 +54,8 @@ public class SecurityConfiguration {
                         .requestMatchers("/user/block-user").hasAuthority("ADMIN")
                         .requestMatchers("/match/create").hasAuthority("ADMIN")
                         .requestMatchers("/match/edit-result").hasAuthority("ADMIN")
-                                .anyRequest().hasAuthority("CLIENT"))
+                        .requestMatchers("/predict/create").hasAuthority("EXPERT")
+                                .anyRequest().permitAll())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
